@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    {{msg}}
+    <table class="basket_table">
+        <caption>
+            {% if user.is_authenticated %}
+                <p>Чтобы зарегестрироваться, сначала выйдите из аккаунта.</p>
+            {% endif %}
+            {% if not user.is_authenticated %}
+            {% if form.errors %}
+                <p>Что-то пошло не так. Попробуйте еще раз.</p>
+            {% endif %}
+        </caption>
+        {{form}}
+        <tr>
+            <th>
+            </th>
+            <td>
+                <input type="submit" value="Регистрация" >
+            </td>
+        </tr>
+
+{% endif %}
+    </table>
+
+
+</form>
+{% endblock content %}

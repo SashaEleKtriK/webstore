@@ -1,0 +1,26 @@
+{% extends "point_base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+<form method="post">
+    {% csrf_token %}
+    {{msg}}
+    <table class="basket_table">
+        <caption>
+            {% if form.errors %}
+              <p>Что-то пошло не так. Попробуйте еще раз.</p>
+            {% endif %}
+        </caption>
+        {{form}}
+        <tr>
+            <th>
+            </th>
+            <td>
+                <input type="submit" value="Отменить" >
+            </td>
+        </tr>
+    </table>
+
+
+</form>
+{% endif %}
+{% endblock content %}

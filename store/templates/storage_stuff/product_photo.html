@@ -1,0 +1,43 @@
+{% extends "storage_base.html" %}
+{% block title %}Заказы{% endblock title %}
+{% block content %}
+{% if not user.is_authenticated %}
+  <p class="err">Авторизуйтесь.</p>
+{% endif %}
+
+    {% if user.is_authenticated %}
+
+<section class="basket_sec">
+    {{msg}}
+
+    <table class="basket_table">
+        <caption>{{text}}
+      </caption>
+        <tbody>
+            <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <td>
+                {{ form.photo }}
+                <p style="display: none">{{ form.product }}</p>
+            </td>
+            <td>
+                <input type="submit" value="Добавить">
+            </td>
+            </form>
+        {% for photo in photos%}
+        <tr>
+            <td>
+              <div class="prod_img" style="background: url({{photo.0}})"></div>
+            </td>
+            <td>
+                <p><a href="delete/?id={{photo.1}}&prod_id={{id}}">Удалить</a></p>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+
+    {% endif %}
+{% endblock content %}

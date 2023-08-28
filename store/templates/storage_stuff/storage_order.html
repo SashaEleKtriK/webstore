@@ -1,0 +1,69 @@
+{% extends "storage_base.html" %}
+{% block title %}Корзина{% endblock title %}
+{% block content %}
+{% if not user.is_authenticated %}
+  <p class="err">Авторизуйтесь.</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+
+<section class="basket_sec">
+    {{msg}}
+    <table class="basket_table">
+        <caption>Заказ №{{order.id}} от {{order.date}}.
+        <p>
+            Пункт выдачи: {{point}}
+        </p></caption>
+      <thead>
+        <tr>
+            <th>Id</th>
+            <th>Фото</th>
+            <th>Название</th>
+            <th>Количество</th>
+            <th>Размер</th>
+        </tr>
+      </thead>
+        <tbody>
+        {% for prod in prods %}
+        <tr>
+            <td>
+                {{prod.0.id}}
+            </td>
+            <td>
+                {% for photo in prod.1 %}
+               <p><a href="{{photo}}">Смотреть</a></p>
+                {% endfor %}
+            </td>
+            <td>
+                {{prod.0.name}}
+            </td>
+            <td>
+                {{prod.2}}
+            </td>
+            <td>
+                {{prod.3}}
+            </td>
+
+        </tr>
+        {% endfor %}
+        <form method="post">
+        {% csrf_token %}
+             <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                 <td>
+                    <input type="submit" value="{{btn}}" />
+                 </td>
+            </tr>
+        </form>
+        </tbody>
+
+    </table>
+</section>
+
+    {% endif %}
+{% endblock content %}

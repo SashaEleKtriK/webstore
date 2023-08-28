@@ -1,0 +1,53 @@
+@font-face {
+    font-family: "Regular";
+    src: url("../fonts/PlayfairDisplay-Regular.ttf");
+  }
+  @font-face {
+    font-family: "Italic";
+    src: url("../fonts/PlayfairDisplay-Italic.ttf");
+  }
+.info_page {
+    width: 50%;
+    margin: auto;
+}
+body{
+    margin: 0;
+    font-family: 'Regular';
+    font-size: 17px;
+}
+.prod_img{
+    height: 300px;
+    width: 200px;
+    background-size: cover !important;
+    background-position: center !important;
+}
+.prod-card{
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px;
+    border: 1px solid black;
+    padding: 20px;
+    width: 210px;
+    height: 700px;
+}
+.products{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.prod_info{
+height: 300px;
+margin-top: 40px;
+}
+.buy_btn{
+    padding: 25px;
+    width: 100px;
+    background: black;
+    color: white;
+    text-align: center;
+    border: 1px solid black
+}
+.buy_btn:hover{
+    background: white;
+    color: black;
+}

@@ -1,0 +1,37 @@
+.basket_table{
+    margin:auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.basket_table caption{
+    font-size: 23px;
+    margin: 25px;
+}
+.basket_table td{
+    background: #E6F3FB;
+    border: 1px solid black;
+    width: 200px;
+    text-align: center;
+}
+.basket_table th{
+    background: #D9D9D9;
+    width: 200px;
+    text-align: center;
+
+}
+.order-div{
+    padding: 20px;
+    border: 1px solid black;
+    width: 60%;
+    align-content: center;
+    margin:auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.orders{
+    margin:auto;
+}
+.orders td{
+    border: 1px solid black;
+    text-align: center;
+}

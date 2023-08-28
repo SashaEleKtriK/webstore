@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <table class="basket_table">
+        <caption>
+            {{msg}}
+        </caption>
+        {{form}}
+        <tr>
+            <th>
+            </th>
+            <td>
+                <input type="submit" value="Принять" >
+            </td>
+        </tr>
+    </table>
+
+
+</form>
+{% endblock content %}

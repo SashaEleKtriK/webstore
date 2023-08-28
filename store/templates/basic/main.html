@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock title %}
+{% block content %}
+
+<div class="stuff_links">
+        <ul>
+            {% if is_storage_stuff or user.is_superuser %}
+            <li><a href="/storage/">Склад</a></li>
+            {% endif %}
+            {% if is_point_stuff or user.is_superuser %}
+            <li><a href="/orderpoint/delivery/">Пункт выдачи</a></li>
+            {% endif %}
+        </ul>
+</div>
+
+<section class="products">
+    <div class="search">
+        <img src="/shop/static/img/Filter.svg" alt="" id="filter_btn" class="off">
+        <div style="display: none" id="jsonCategory" data-json="{{ data.0 }}"></div>
+        <div style="display: none" id="jsonSubCategory" data-json="{{ data.1 }}"></div>
+        <div class="hidden_filter" id="cat">
+        </div>
+        <div class="hidden_sub_filter" id="scat">
+        </div>
+    </div>
+
+{% for prod in prods %}
+       <div class="prod-card">
+            <div class="prod_img" style="background: url({{prod.0.0}})">
+            </div>
+            <div class="prod_info">
+                <p>{{prod.1}}</p>
+                <p>Страна производства: {{prod.2}}</p>
+                <p>Бренд: {{prod.3}}</p>
+                <p>Размеры: {{prod.4}}</p>
+                <p>В Наличии: {{prod.5}} шт.</p>
+                <p>Цена : {{prod.6}} руб.</p>
+                <a href="/product/?id={{prod.7}}">
+                    <div class="buy_btn">
+                        Купить
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    {% endfor %}
+</section>
+
+{% endblock content %}

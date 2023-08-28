@@ -1,0 +1,72 @@
+{% extends "storage_base.html" %}
+{% block title %}Заказы{% endblock title %}
+{% block content %}
+{% if not user.is_authenticated %}
+  <p class="err">Авторизуйтесь.</p>
+{% endif %}
+
+    {% if user.is_authenticated %}
+
+<section class="basket_sec">
+    <form method="post">
+    {% csrf_token %}
+    <table>
+    <tr>
+        <td>Поиск по id</td>
+        <td>{{ form.quest }}</td>
+        <td>
+            <input type="submit" value="Поиск" />
+        </td>
+    </tr>
+    </table>
+    </form>
+    <table class="basket_table">
+        <caption>{{text}}
+      </caption>
+      <thead>
+        <tr>
+            <th>id</th>
+            <th>Название</th>
+            <th>Бренд</th>
+            <th>Стоимость</th>
+            <th>Фото</th>
+            <th>На складе</th>
+        </tr>
+      </thead>
+        <tbody>
+        {% for prod in prods %}
+        <tr>
+
+            <td>
+                {{prod.1}}
+            </td>
+            <td>
+                {{prod.2}}
+            </td>
+            <td>
+                {{prod.3}}
+            </td>
+            <td>
+                {{prod.4}}
+            </td>
+            <td>
+                {% for photo in prod.0 %}
+               <p><a href="{{photo}}">Смотреть</a></p>
+                {% endfor %}
+                <p><a href="{{url_p}}{{prod.1}}">Редактировать фото</a></p>
+            </td>
+            <td>
+                <p><a href="{{url_s}}{{prod.1}}">На складе</a></p>
+            </td>
+            <td>
+                <p><a href="{{url}}{{prod.1}}">Редактировать</a></p>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+
+    {% endif %}
+{% endblock content %}

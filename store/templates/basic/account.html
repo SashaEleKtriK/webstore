@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock title %}
+{% block content %}
+
+<div class="stuff_links">
+        <ul>
+            {% if is_storage_stuff or user.is_superuser %}
+            <li><a href="/storage/">Склад</a></li>
+            {% endif %}
+            {% if is_point_stuff or user.is_superuser %}
+            <li><a href="/orderpoint/delivery/">Пункт выдачи</a></li>
+            {% endif %}
+        </ul>
+</div>
+
+<section class="acc">
+  <table class="basket_table">
+    <tr>
+      <td>Логин</td>
+      <td>{{user.username}}</td>
+    </tr>
+    <tr>
+      <td>Почта</td>
+      <td>{{user.email}}</td>
+    </tr>
+    <tr>
+      <td>Пароль</td>
+      <td><a href="/accounts/password_reset/">Сменить пароль</a></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><a href="/accounts/logout">Выйти</a></td>
+    </tr>
+  </table>
+</section>
+
+{% endblock content %}

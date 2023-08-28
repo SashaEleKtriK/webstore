@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}Корзина{% endblock title %}
+{% block content %}
+{% if not user.is_authenticated %}
+  <p class="err">Чтобы просмотривать корзину, сначала авторизуйитесь.</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+<section class="basket_sec">
+    {{msg}}
+    <table class="basket_table">
+        <caption>Корзина
+      </caption>
+      <thead>
+        <tr>
+            <th>Фото</th>
+            <th>Название</th>
+            <th>Количество</th>
+            <th>Размер</th>
+            <th>Стоимость 1 шт</th>
+            <th>Стоимость</th>
+        </tr>
+      </thead>
+        <tbody>
+            {% for prod in basket %}
+        <tr>
+            <td>
+                <div class="prod_img" style="background: url({{prod.3.0}})">
+            </div>
+            </td>
+            <td>
+                {{prod.0}}
+            </td>
+            <td>
+                {{prod.1}}
+            </td>
+            <td>
+                {{prod.2}}
+            </td>
+            <td>
+                {{prod.4}}
+            </td>
+            <td>
+                {{prod.5}}
+            </td>
+            <td>
+                <a href="delete/?order={{prod.6}}&size={{prod.2}}&id={{prod.7}}">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+        <form method="post">
+        {% csrf_token %}
+             <tr>
+                <td>
+                    Выберите пункт выдачи:
+                </td>
+                <td>
+                    {{form.points}}
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    Итого: {{total}}
+                </td>
+                 <td>
+                    <input type="submit" value="Купить" />
+                 </td>
+            </tr>
+        </form>
+        </tbody>
+
+    </table>
+
+{% endif %}
+{% for order in orders %}
+    <div class="order-div">
+            <table class="orders">
+        <caption>Заказ №{{order.0}} от {{order.1}}.
+        <p>
+            Статус: {{order.2}}
+        </p>
+        <p>
+            Пункт выдачи: {{order.3}}
+        </p></caption>
+         <thead>
+        <tr>
+            <th>Фото</th>
+            <th>Название</th>
+            <th>Количество</th>
+            <th>Размер</th>
+            <th>Стоимость 1 шт</th>
+            <th>Стоимость</th>
+        </tr>
+      </thead>
+      {% for prod in order.4 %}
+        <tr>
+            <td>
+                <div class="prod_img" style="background: url({{prod.3.0}})">
+            </div>
+            </td>
+            <td>
+                {{prod.0}}
+            </td>
+            <td>
+                {{prod.1}}
+            </td>
+            <td>
+                {{prod.2}}
+            </td>
+            <td>
+                {{prod.4}}
+            </td>
+            <td>
+                {{prod.5}}
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    Итого: {{order.5}}
+                </td>
+             {% if order.6 %}
+                 <td>
+                 <a href="cansel/?order={{order.0}}">Отменить</a>
+                 </td>
+             {% endif %}
+            </tr>
+    </table>
+    </div>
+
+ {% endfor %}
+</section>
+
+
+{% endblock content %}

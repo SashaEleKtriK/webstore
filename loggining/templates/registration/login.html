@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+
+{% if user.is_authenticated %}
+  <p>Чтобы авторизоваться, сначала выйдите из аккаунта.</p>
+{% endif %}
+
+{% if not user.is_authenticated %}
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<table class="basket_table">
+
+<tr>
+  <td>Логин</td>
+  <td>{{ form.username }}</td>
+</tr>
+
+<tr>
+  <td>Пароль</td>
+  <td>{{ form.password }}</td>
+</tr>
+<tr>
+  <td>
+    Нажмите, чтобы войти:
+  </td>
+  <td>
+    <input type="submit" value="Войти" />
+  </td>
+</tr>
+<tr>
+  <td>
+    <a href="/register">Регистрация</a>
+  </td>
+  <td>
+    <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+  </td>
+</tr>
+</table>
+
+</form>
+
+{% endif %}
+{% endblock %}

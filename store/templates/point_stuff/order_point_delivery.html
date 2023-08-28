@@ -1,0 +1,61 @@
+{% extends "point_base.html" %}
+{% block title %}Заказы{% endblock title %}
+{% block content %}
+{% if not user.is_authenticated %}
+  <p class="err">Авторизуйтесь.</p>
+{% endif %}
+
+    {% if user.is_authenticated %}
+
+<section class="basket_sec">
+    {{msg}}
+       <table class="basket_table">
+        <tr>
+            {% for point in points %}
+            <td><a href="/orderpoint/delivery/?id={{point.id}}">{{point}}</a></td>
+            {% endfor %}
+        </tr>
+    </table>
+    <table class="basket_table">
+        <caption>{{text}} <br>
+            Пункт выдачи: {{cur_point}}
+      </caption>
+      <thead>
+        <tr>
+            <th>№ Заказа</th>
+            <th>Дата</th>
+            <th>В доставке</th>
+        </tr>
+      <tr>
+                <th>
+                </th>
+                <th>
+                </th>
+                <th>
+                    {{count}}
+                </th>
+
+            </tr>
+      </thead>
+        <tbody>
+        {% for order in orders %}
+        <tr>
+
+            <td>
+                {{order.id}}
+            </td>
+            <td>
+                {{order.date}}
+            </td>
+            <td>
+                <a href="{{url}}{{order.id}}">Принять</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+
+    {% endif %}
+{% endblock content %}

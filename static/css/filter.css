@@ -1,0 +1,45 @@
+.search{
+    position: absolute;
+    top: 200px;
+    left: 120px;
+    display: flex;
+    flex-direction: row;
+     z-index: 2;
+}
+.search img{
+    width: 100px;
+    height: 100px;
+}
+.search img:hover {
+    opacity: 0.6;
+}
+.filter{
+    width: 200px;
+    margin-left: 20px;
+
+}
+.hidden_filter{
+    display: none;
+}
+.sub_filter{
+    width: 200px;
+    display: block;
+    margin-left: 5px
+}
+.hidden_sub_filter{
+    display: none;
+}
+.filter a{
+    text-decoration: none;
+    color: black;
+}
+.sub_filter a{
+    text-decoration: none;
+    color: black;
+}
+.filter-li{
+    border: 1px solid black;
+    padding: 20px;
+    list-style: none;
+    background: white;
+}

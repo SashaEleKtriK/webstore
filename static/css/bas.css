@@ -1,0 +1,7 @@
+.orders{
+    margin:auto;
+}
+.orders td{
+    border: 1px solid black;
+    text-align: center;
+}

@@ -1,0 +1,51 @@
+{% extends "storage_base.html" %}
+{% block title %}Заказы{% endblock title %}
+{% block content %}
+{% if not user.is_authenticated %}
+  <p class="err">Авторизуйтесь.</p>
+{% endif %}
+
+    {% if user.is_authenticated %}
+
+<section class="basket_sec">
+    {{msg}}
+
+    <table class="basket_table">
+        <caption>Категории
+      </caption>
+        <thead>
+        <tr>
+            <th>Название</th>
+        </tr>
+      </thead>
+        <tbody>
+            <form method="post">
+            {% csrf_token %}
+                <td>
+                    Добавьте подкатегорию
+                </td>
+              <td>
+                {{ form.name }}
+              <p style="display: none">{{ form.category }}</p>
+            </td>
+            <td>
+                <input type="submit" value="Добавить">
+            </td>
+            </form>
+        {% for sub_cat in sub_cats%}
+        <tr>
+            <td>
+              {{sub_cat.name}}
+            </td>
+            <td>
+                <p><a href="delete/?id={{sub_cat.id}}&cat_id={{cat_id}}">Удалить</a></p>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+
+    {% endif %}
+{% endblock content %}

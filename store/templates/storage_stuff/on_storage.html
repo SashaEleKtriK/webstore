@@ -1,0 +1,55 @@
+{% extends "storage_base.html" %}
+{% block title %}Заказы{% endblock title %}
+{% block content %}
+{% if not user.is_authenticated %}
+  <p class="err">Авторизуйтесь.</p>
+{% endif %}
+
+    {% if user.is_authenticated %}
+
+<section class="basket_sec">
+    {{msg}}
+
+    <table class="basket_table">
+        <caption>id товара {{id}}
+      </caption>
+        <thead>
+        <tr>
+            <th>Количество</th>
+            <th>Размер</th>
+        </tr>
+      </thead>
+        <tbody>
+            <form method="post">
+            {% csrf_token %}
+              <td>
+                {{ form.count }}
+            </td>
+            <td>
+                {{ form.size }}
+                <p style="display: none">{{ form.product }}</p>
+            </td>
+            <td>
+                <input type="submit" value="Добавить">
+            </td>
+            </form>
+        {% for prod in prods%}
+        <tr>
+            <td>
+              {{prod.count}}
+            </td>
+            <td>
+                <a href="/storage/redact_products/on_storage/?id={{prod.product_id}}&size={{prod.size}}">{{prod.size}}</a>
+            </td>
+            <td>
+                <p><a href="/storage/redact_products/on_storage/delete/?id={{prod.id}}&prod_id={{prod.product_id}}">Удалить</a></p>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Одежда{% endblock title %}
+{% block content %}
+<section class="product-page">
+
+       <div class="prod_page_info">
+            <div class="prod_info_page">
+                <p>{{prod.1}}</p>
+                <p>Страна производства: {{prod.2}}</p>
+                <p>Бренд: {{prod.3}}</p>
+                <table class="size_table">
+                    {% for info in prod.4 %}
+                    <tr>
+                        <td>{{info}}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+                <p>Цена : {{prod.5}} руб.</p>
+            </div>
+        </div>
+    <div class="photos">
+        <img src="{{prod.0.0}}" alt="" id="main_photo">
+
+        <div class="inline-photos">
+        {% for photo in prod.0%}
+        <div class="prod_img_page" style="background: url({{photo}})"></div>
+        {% endfor %}
+        </div>
+
+    </div>
+
+    <div class="buy-form">
+    {% if user.is_authenticated %}
+    <form method="post">
+    {% csrf_token %}
+    {{msg}}
+    <table>
+        {{form}}
+    </table>
+        <input type="submit" value="Купить" id="btn_buy" >
+
+        </form>
+    {% endif %}
+    </div>
+
+</section>
+
+{% endblock content %}
